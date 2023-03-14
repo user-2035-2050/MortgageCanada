@@ -1,0 +1,116 @@
+.main {
+  padding: 20px;
+  margin: 0;
+  margin: 0 auto;
+  max-width: 1200px;
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+.header {
+  margin: 30px 0;
+  line-height: 100px;
+}
+.label {
+  margin-bottom: 0;
+  line-height: 40px;
+}
+p.tab {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.dollar::before {
+  content: '$';
+}
+.secondColumn {
+  width: 30%;
+  text-align: right;
+}
+.rightText {
+  text-align: right;
+}
+.boldText {
+  font-weight: bold;
+}
+.btnYes {
+  width: calc(50% - 40px);
+  margin-top: 15px;
+  margin-left: 35px;
+  margin-right: 5px;
+  line-height: 60px;
+  border-radius: 4px;
+  font-size: 1.4rem;
+  border: 1px solid black;
+  box-sizing: border-box;
+  background-color: white;
+}
+.btnNo {
+  width: calc(50% - 40px);
+  margin-top: 15px;
+  margin-left: 5px;
+  margin-right: 35px;
+  line-height: 60px;
+  border-radius: 4px;
+  font-size: 1.4rem;
+  border: 1px solid black;
+  box-sizing: border-box;
+  background-color: rgb(221, 248, 248);
+}
+.rightBorderBox {
+  border-right: 1px solid rgb(175, 173, 173);
+}
+.card {
+  margin-top: 20px;
+  line-height: 60px;
+}
+.card p {
+  margin-bottom: 0;
+  line-height: 80px;
+  text-indent: 20px;
+  font-size: 1.4rem;
+}
+.dottedLine {
+  border-top: dashed 1px;
+}
+.dottedLabel {
+  line-height: 32px;
+}
+.btnNext {
+  background-color: rgb(118, 200, 228);
+  color: white;
+  padding: 10px 30px;
+}
+.btnNext:hover {
+  background-color: rgb(101, 183, 211);
+  color: white;
+  vertical-align: middle;
+}
+.btnNext:focus {
+  background-color: rgb(101, 183, 211);
+  color: white;
+  border: none;
+}
+.percentBadge {
+  font-weight: bold;
+  font-size: 2rem;
+}
+.verticalAlign {
+  vertical-align: middle;
+}
+.verticalAlignBottom {
+  vertical-align: bottom;
+}
+p.detailInfo {
+  margin-bottom: 0;
+}
+.lendText {
+  color: aqua;
+  font-weight: bold;
+}
+.wesText {
+  color: rgb(92, 81, 243);
+  font-weight: bold;
+}
+.weslend {
+  margin-bottom: 0;
+}
