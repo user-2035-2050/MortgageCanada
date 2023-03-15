@@ -2,8 +2,71 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { Line, Doughnut } from "react-chartjs-2"
 import { Chart } from 'chart.js/auto'
+import { useEffect, useState } from "react"
 
 export default function Home() {
+  const [homePrice, setHomePrice] = useState(425000);
+  const [downPrice, setDownPrice] = useState(85000);
+  const [year, setYear] = useState(30);
+  const [rate, setRate] = useState(5);
+  const [percent, setPercent] = useState(20);
+  const [principal, setPrincipal] = useState(0);
+  const [tax, setTax] = useState(280);
+  const [total, setTotal] = useState(0);
+  const [insurance, setInsurance] = useState(66);
+  const [pmi, setPMI] = useState(0);
+  const [foa, setFOA] = useState(0);
+  const [ddata, setDData] = useState([]);
+  const [ldata, setLData] = useState([]);
+  const handleChange = async (e) => {
+    let locVal = parseFloat(e.target.value);
+    if(e.target.name === "homePrice"){
+      setHomePrice(locVal)
+      setDownPrice(locVal / 5)
+    }
+    if(e.target.name === "downPrice"){
+      setDownPrice(locVal)
+    }    
+    if(e.target.name === "rate"){
+      setRate(locVal)
+    }
+    if(e.target.name === "year"){
+      setYear(locVal)
+    }
+    if(e.target.name === "tax"){
+      setTax(locVal)
+    }
+    if(e.target.name === "foa"){
+      setFOA(locVal)
+    }
+    if(e.target.name === "pmi"){
+      setPMI(locVal)
+    }
+    if(e.target.name === "interest"){
+      setInterest(locVal)
+    }
+    if(e.target.name === "insurance"){
+      setInsurance(locVal)
+    }
+  }
+
+  useEffect(() => {    
+    setTotal(principal + foa + pmi + tax + insurance);
+    setDData([principal, tax, insurance, pmi, foa]);
+  }, [foa, pmi, principal, tax, insurance])
+
+  useEffect(() => {    
+    let P = homePrice - downPrice;
+    let r = rate / 12 / 100;
+    let n = year * 12;
+    let M = P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n)- 1);
+    setPrincipal(parseInt(M));
+  }, [downPrice, homePrice, rate, year])
+
+  useEffect(() => {
+    setPercent((100 * downPrice / homePrice).toFixed(0));
+  }, [downPrice, homePrice])
+
   const labels = [
     "Principal & Interest",
     "Property Tax",
@@ -16,7 +79,7 @@ export default function Home() {
     datasets: [
       {
         label: "Monthly payment breakdown",
-        data: [425000, 550000, 200000, 100000, 130000],
+        data: ddata,
         backgroundColor: [
           "#4949d0",
           "#66ff99",
@@ -87,11 +150,11 @@ export default function Home() {
         <div className='row'>
           <div className='col-md-4'>
             <p className={styles.label}>Home Price($)</p>
-            <input type={`number`} placeholder={`425000`} className={`form-control ` + styles.dollar} />
-            <p className={styles.label}>Down Payment($)</p>
-            <input type={`number`} placeholder={`8500`} className={`form-control`} />
+            <input type={`number`} min={0} placeholder={`425000`} value={homePrice} className={`form-control ` + styles.dollar} onChange={handleChange} name="homePrice" />
+            <p className={styles.label}>Down Payment($ / {percent}%)</p>
+            <input type={`number`} min={0} placeholder={`8500`} className={`form-control`} value={downPrice} onChange={handleChange} name="downPrice" />
             <p className={styles.label}>Loan Term</p>
-            <select className={`form-control`}>
+            <select className={`form-control`} defaultValue={year} name="year" onChange={handleChange}>
               <option value={5}>5 Years</option>
               <option value={10}>10 Years</option>
               <option value={15}>15 Years</option>
@@ -99,10 +162,10 @@ export default function Home() {
               <option value={25}>25 Years</option>
               <option value={30}>30 Years</option>
             </select>
-            <p className={styles.label}>Interest Rate</p>
-            <input type={`number`} placeholder={`5`} className={`form-control`} />
+            <p className={styles.label}>Interest Rate(%)</p>
+            <input type={`number`} min={0} placeholder={`5`} max={100} className={`form-control`} value={rate} name="rate" onChange={handleChange} />
             <p className={styles.label}>Zip Code</p>
-            <input type={`number`} placeholder={`680000`} className={`form-control`} />
+            <input type={`number`} min={0} placeholder={`680000`} className={`form-control`} />
             <p className={styles.tab}>Amortization</p>
             <Line 
               data={linedata}
@@ -157,8 +220,8 @@ export default function Home() {
           <div className='col-md-8'>
             <p className={styles.tab}>Payment Breakdown</p>
             <h2>Monthly Payment Breakdown</h2>
-            <div className='row'>
-              <div className='col-md-6 text-center'>
+            <div className={`row`}>
+              <div className={'col-md-6 text-center '+styles.relativeDiv}>
                 <br />
               <Doughnut
                 data={doughnutdata}
@@ -174,66 +237,64 @@ export default function Home() {
                   },
                 }}
               />
+              <span className={styles.totalFee}>${total}</span>
               </div>
               <div className='col-md-6'>
                 <table className='table'>
                   <tbody>
                     <tr>
                       <td>
-                        <p className={styles.label}>Principal & interest</p>
+                        <p className={styles.label}><span className={styles.circlePrincipalMark}></span>Principal & interest</p>
                       </td>
+                      <td width={20}></td>
                       <td className={styles.secondColumn}>
-                        <p>$1,825</p>
+                        <p className={styles.boldText}>${principal}</p>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <p className={styles.label}>Property tax</p>
+                        <p className={styles.label}><span className={styles.circleTaxMark}></span>Property tax</p>
                       </td>
+                      <td width={20}><span className={styles.Operator}>+</span></td>
                       <td>
-                        <input type={`number`} placeholder={0.00} className={`form-control`} />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p className={styles.label}>Homeowner&#39;s insurance</p>
-                      </td>
-                      <td>
-                        <input type={`number`} placeholder={0.00} className={`form-control`} />
+                        <input type={`number`} min={0} placeholder={0.00} className={`form-control`} name="tax" value={tax} onChange={handleChange} />
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <p className={styles.label}>Principal & interest</p>
+                        <p className={styles.label}><span className={styles.circleInsuranceMark}></span>Homeowner&#39;s insurance</p>
                       </td>
+                      <td width={20}><span className={styles.Operator}>+</span></td>
                       <td>
-                        <input type={`number`} placeholder={0.00} className={`form-control`} />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p className={styles.label}>PMI</p>
-                      </td>
-                      <td>
-                        <input type={`number`} placeholder={0.00} className={`form-control`} />
+                        <input type={`number`} min={0} placeholder={0.00} className={`form-control`} name="insurance" value={insurance} onChange={handleChange} />
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <p className={styles.label}>HOA fees</p>
+                        <p className={styles.label}><span className={styles.circlePMIMark}></span>PMI</p>
                       </td>
+                      <td width={20}><span className={styles.Operator}>+</span></td>
                       <td>
-                        <input type={`number`} placeholder={0.00} className={`form-control`} />
+                        <input type={`number`} min={0} placeholder={0.00} className={`form-control`} name="pmi" value={pmi} onChange={handleChange} />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p className={styles.label}><span className={styles.circleHOAMark}></span>HOA fees</p>
+                      </td>
+                      <td width={20}><span className={styles.Operator}>+</span></td>
+                      <td>
+                        <input type={`number`} min={0} placeholder={0.00} className={`form-control`} name="foa" value={foa} onChange={handleChange} />
                       </td>
                     </tr>
                   </tbody>
                 </table>
                 <div className='row'>
                   <div className='col-md-8'>
-                    <p>Total monthly payment</p>
+                    <p className={styles.boldText}>Total monthly payment</p>
                   </div>
                   <div className={'col-md-4 ' + styles.rightText}>
-                    <p>$2,171</p>
+                    <p className={styles.boldText}>${total}</p>
                   </div>
                 </div>
               </div>
