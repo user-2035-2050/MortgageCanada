@@ -74,6 +74,7 @@ p.tab {
 }
 .dottedLabel {
   line-height: 32px;
+  flex-shrink: 1;
 }
 .btnNext {
   background-color: rgb(118, 200, 228);
@@ -113,6 +114,15 @@ p.detailInfo {
 }
 .weslend {
   margin-bottom: 0;
+}
+.circleInterestMark {
+  background-color: #ffe553;
+  display: inline-block;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  vertical-align: middle;
+  margin-right: 10px;;
 }
 .circlePrincipalMark {
   background-color: #4949d0;
@@ -185,4 +195,48 @@ p.detailInfo {
   vertical-align: middle;
   height: 40px;
   float: right;
+}
+
+.cashText {
+  font-size: 1.1rem !important;
+  line-height: 1.4rem !important;
+  margin-bottom: 20px !important;
+  text-indent: 0 !important;
+  padding: 0 20px;
+  word-wrap: break-word;
+}
+.cashLabel {
+  font-size: 1.2rem !important;
+  font-weight: bold;
+  line-height: 2rem !important;
+  text-indent: 0 !important;
+}
+.marginBottom20 {
+  margin-bottom: 20px !important;
+}
+.paddingLeftRight20 {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+.marginLeftRight20 {
+  margin-left: 20px !important;
+  margin-right: 20px !important;
+  width: calc(100% - 40px) !important;
+}
+.flexDiv {
+  display: flex;
+}
+.w100 {
+  width: 50%;
+  margin-left: auto;
+}
+.form-control {
+  line-height: 40px !important;
+}
+.cash {
+  color: cadetblue !important;
+}
+.separateSpace {
+  line-height: 20px !important;
+  height: 10px !important;
 }
