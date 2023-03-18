@@ -103,7 +103,7 @@ export default function Home() {
         (1 - localRate) *
         2;
     setRebate(parseInt(val));
-  }, [homeState.downPrice, homeState.homePrice, newbie]);
+  }, [homeState, newbie]);
 
   const labels = [
     "Principal",
@@ -192,7 +192,7 @@ export default function Home() {
                     },
                   }}
                 />
-                <span className={styles.totalFee}>${total.toFixed(0)}</span>
+                <span className={styles.totalFee}>${total && total.toFixed(0)}</span>
               </div>
               <div className="col-md-6">
                 <MonthlyPayment

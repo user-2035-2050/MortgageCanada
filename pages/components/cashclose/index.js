@@ -139,7 +139,7 @@ const CashClose = (props) => {
               </div>
               <div className="col-md-3">
                 <h5 className={styles.dottedLabel}>
-                  ${(downPaymentOption * props.homeState.homePrice) / 100}
+                  ${props.homeState && (downPaymentOption * props.homeState.homePrice) / 100}
                 </h5>
               </div>
             </div>

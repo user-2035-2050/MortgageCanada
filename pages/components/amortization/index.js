@@ -91,7 +91,7 @@ const Amortization = (props) => {
             </td>
             <td className={styles.rightText}>
               <p className={styles.label}>
-                ${(homeState.homePrice * (100 - homeState.downPrice)) / 100 / homeState.year * (2026-2023)}
+                ${homeState && (homeState.homePrice * (100 - homeState.downPrice)) / 100 / homeState.year * (2026-2023)}
               </p>
             </td>
           </tr>
@@ -110,7 +110,7 @@ const Amortization = (props) => {
             <td className={styles.rightText}>
               <p className={styles.label}>
                 $
-                {(homeState.homePrice * (100 - homeState.downPrice)) / 100 -
+                {homeState && (homeState.homePrice * (100 - homeState.downPrice)) / 100 -
                   (homeState.homePrice * (100 - homeState.downPrice)) / 100 / homeState.year * (2026-2023)}
               </p>
             </td>
