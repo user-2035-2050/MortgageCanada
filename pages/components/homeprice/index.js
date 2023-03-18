@@ -36,7 +36,7 @@ const HomePrice = (props) => {
         type={`number`}
         min={0}
         placeholder={`425000`}
-        value={homeState.homePrice}
+        value={homeState && homeState.homePrice}
         className={`form-control ` + styles.dollar}
         onChange={handleChange}
         name="homePrice"
@@ -45,7 +45,7 @@ const HomePrice = (props) => {
       <select
         className={`form-control`}
         name="downPrice"
-        defaultValue={homeState.downPrice}
+        defaultValue={homeState && homeState.downPrice}
         onChange={handleChange}
       >
         {downPriceData.map((item, index) => <option value={item.value} key={index}>{item.label}</option>)}
@@ -53,7 +53,7 @@ const HomePrice = (props) => {
       <p className={styles.label}>Loan Term</p>
       <select
         className={`form-control`}
-        defaultValue={homeState.year}
+        defaultValue={homeState && homeState.year}
         name="year"
         onChange={handleChange}
       >
@@ -66,7 +66,7 @@ const HomePrice = (props) => {
         placeholder={`5`}
         max={100}
         className={`form-control`}
-        value={homeState.rate}
+        value={homeState && homeState.rate}
         name="rate"
         onChange={handleChange}
       />

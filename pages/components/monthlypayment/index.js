@@ -26,7 +26,7 @@ const MonthlyPayment = (props) => {
             </td>
             <td width={20}></td>
             <td className={styles.secondColumn}>
-              <p className={styles.boldText}>${props.principal.toFixed(0)}</p>
+              <p className={styles.boldText}>${props.principal && props.principal.toFixed(0)}</p>
             </td>
           </tr>
           <tr>
@@ -38,7 +38,7 @@ const MonthlyPayment = (props) => {
             </td>
             <td width={20}></td>
             <td className={styles.secondColumn}>
-              <p className={styles.boldText}>${props.interest.toFixed(0)}</p>
+              <p className={styles.boldText}>${props.interest && props.interest.toFixed(0)}</p>
             </td>
           </tr>
           <tr>
@@ -57,7 +57,7 @@ const MonthlyPayment = (props) => {
                 placeholder={0.0}
                 className={`form-control`}
                 name="tax"
-                value={paymentState.tax}
+                value={paymentState && paymentState.tax}
                 onChange={handleChange}
               />
             </td>
@@ -133,7 +133,7 @@ const MonthlyPayment = (props) => {
           <p className={styles.boldText}>Total monthly payment</p>
         </div>
         <div className={"col-md-4 " + styles.rightText}>
-          <p className={styles.boldText}>${props.total.toFixed(0)}</p>
+          <p className={styles.boldText}>${props.total && props.total.toFixed(0)}</p>
         </div>
       </div>
     </div>
