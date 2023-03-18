@@ -172,7 +172,7 @@ p.detailInfo {
 .totalFee {
   position: absolute;
   left: calc(50% - 0);
-  top: calc(50% - 2rem);
+  top: calc(50% - 2.6rem);
   font-size: 2rem;
   font-weight: bold;
   width: 100%;
